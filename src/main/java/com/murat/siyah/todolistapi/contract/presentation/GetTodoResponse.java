@@ -19,7 +19,7 @@ public class GetTodoResponse {
         user = todo.getUser();
         header = todo.getHeader();
         text = todo.getText();
-        date = todo.getDate();
+        date = todo.getCreatedDate();
     }
 
     public String getId() {

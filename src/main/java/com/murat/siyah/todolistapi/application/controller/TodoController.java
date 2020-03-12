@@ -7,6 +7,8 @@ import com.murat.siyah.todolistapi.contract.presentation.GetTodolistResponse;
 import com.murat.siyah.todolistapi.domain.todo.command.AddTodoCommand;
 import com.murat.siyah.todolistapi.domain.todo.command.DeleteCommand;
 import com.murat.siyah.todolistapi.domain.todo.command.UpdateTodoCommand;
+import com.murat.siyah.todolistapi.domain.todo.query.GetTodoByIdQuery;
+import com.murat.siyah.todolistapi.domain.todo.query.GetTodosQuery;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,28 +24,32 @@ public class TodoController {
         this.todoQueryHandler = todoQueryHandler;
     }
 
-    @GetMapping("{id}")
-    public GetTodoResponse getById(@PathVariable String id) {
+    @GetMapping
+    public GetTodolistResponse get(@RequestParam(defaultValue = "0", required = false) int page,
+                                   @RequestParam(defaultValue = "100", required = false) int size,
+                                   @RequestParam(required = false) String user) {
+        GetTodosQuery query = new GetTodosQuery(page, size, user);
 
-        return todoQueryHandler.getTodoById();
+        return todoQueryHandler.getTodos(query);
     }
 
-    @GetMapping
-    public GetTodolistResponse get() {
+    @GetMapping("{id}")
+    public GetTodoResponse getById(@PathVariable String id) {
+        GetTodoByIdQuery query = new GetTodoByIdQuery(id);
 
-        return todoQueryHandler.getTodos();
+        return todoQueryHandler.getTodoById(query);
     }
 
     @PostMapping
-    public void add(@RequestBody AddTodoCommand command) {
-        todoCommandHandler.addTodo(command);
+    public GetTodoResponse add(@RequestBody AddTodoCommand command) {
+        return todoCommandHandler.addTodo(command);
     }
 
     @PutMapping("{id}")
-    public void update(@RequestBody UpdateTodoCommand command, @PathVariable String id) {
+    public GetTodoResponse update(@RequestBody UpdateTodoCommand command, @PathVariable String id) {
         command.setId(id);
 
-        todoCommandHandler.updateTodo(command);
+        return todoCommandHandler.updateTodo(command);
     }
 
     @DeleteMapping("{id}")

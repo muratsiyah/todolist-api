@@ -8,6 +8,11 @@ public class GetTodolistResponse {
 
     private List<GetTodolistModel> todolist;
 
+    public GetTodolistResponse(String user, List<GetTodolistModel> todolist) {
+        this.user = user;
+        this.todolist = todolist;
+    }
+
     public String getUser() {
         return user;
     }

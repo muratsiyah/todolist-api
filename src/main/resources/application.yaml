@@ -1,3 +1,6 @@
 spring:
   application:
     name: todolist-api
+  data:
+    couchbase:
+      auto-index: true

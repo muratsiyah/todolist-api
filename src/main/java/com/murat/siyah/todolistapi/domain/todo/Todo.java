@@ -20,9 +20,9 @@ public class Todo {
 
     private String text;
 
-    private String date;
+    private String createdDate;
 
-    private boolean isActive;
+    private boolean isDeleted;
 
     public Todo() {
 
@@ -33,8 +33,8 @@ public class Todo {
         user = command.getUser();
         header = command.getHeader();
         text = command.getText();
-        date = LocalDateTime.now().toString();
-        isActive = true;
+        createdDate = LocalDateTime.now().toString();
+        isDeleted = true;
     }
 
     public void update(UpdateTodoCommand command) {
@@ -42,8 +42,8 @@ public class Todo {
         text = command.getText();
     }
 
-    public void passive() {
-        isActive = false;
+    public void deleted() {
+        isDeleted = false;
     }
 
     public String getId() {
@@ -62,12 +62,12 @@ public class Todo {
         return text;
     }
 
-    public String getDate() {
-        return date;
+    public String getCreatedDate() {
+        return createdDate;
     }
 
-    public boolean isActive() {
-        return isActive;
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
 }

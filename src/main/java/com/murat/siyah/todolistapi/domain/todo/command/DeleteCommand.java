@@ -16,4 +16,12 @@ public class DeleteCommand {
     public void setId(String id) {
         this.id = id;
     }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 }
