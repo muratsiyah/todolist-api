@@ -2,13 +2,12 @@ package com.murat.siyah.todolistapi.application.controller;
 
 import com.murat.siyah.todolistapi.application.handler.TodoCommandHandler;
 import com.murat.siyah.todolistapi.application.handler.TodoQueryHandler;
-import com.murat.siyah.todolistapi.domain.todo.Todo;
+import com.murat.siyah.todolistapi.contract.presentation.GetTodoResponse;
+import com.murat.siyah.todolistapi.contract.presentation.GetTodolistResponse;
 import com.murat.siyah.todolistapi.domain.todo.command.AddTodoCommand;
 import com.murat.siyah.todolistapi.domain.todo.command.DeleteCommand;
 import com.murat.siyah.todolistapi.domain.todo.command.UpdateTodoCommand;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("todo")
@@ -24,13 +23,13 @@ public class TodoController {
     }
 
     @GetMapping("{id}")
-    public Todo getById(@PathVariable String id) {
+    public GetTodoResponse getById(@PathVariable String id) {
 
         return todoQueryHandler.getTodoById();
     }
 
     @GetMapping
-    public List<Todo> get() {
+    public GetTodolistResponse get() {
 
         return todoQueryHandler.getTodos();
     }

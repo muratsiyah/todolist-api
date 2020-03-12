@@ -46,4 +46,28 @@ public class Todo {
         isActive = false;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
 }

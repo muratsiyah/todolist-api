@@ -1,18 +1,17 @@
 package com.murat.siyah.todolistapi.application.handler;
 
-import com.murat.siyah.todolistapi.domain.todo.Todo;
+import com.murat.siyah.todolistapi.contract.presentation.GetTodoResponse;
+import com.murat.siyah.todolistapi.contract.presentation.GetTodolistResponse;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 @Component
 public class TodoQueryHandler {
 
-    public Todo getTodoById() {
+    public GetTodoResponse getTodoById() {
         return null;
     }
 
-    public List<Todo> getTodos() {
+    public GetTodolistResponse getTodos() {
         return null;
     }
 }
