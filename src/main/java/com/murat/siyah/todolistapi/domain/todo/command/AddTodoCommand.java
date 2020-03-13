@@ -1,11 +1,16 @@
 package com.murat.siyah.todolistapi.domain.todo.command;
 
+import javax.validation.constraints.NotBlank;
+
 public class AddTodoCommand {
 
+    @NotBlank
     private String user;
 
+    @NotBlank
     private String header;
 
+    @NotBlank
     private String text;
 
     public String getUser() {
@@ -30,6 +35,15 @@ public class AddTodoCommand {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return "AddTodoCommand{" +
+                "user='" + user + '\'' +
+                ", header='" + header + '\'' +
+                ", text='" + text + '\'' +
+                '}';
     }
 
 }

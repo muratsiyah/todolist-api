@@ -1,9 +1,15 @@
 package com.murat.siyah.todolistapi.domain.todo.command;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.validation.constraints.NotBlank;
+
 public class UpdateTodoCommand {
 
+    @JsonIgnore
     private String id;
 
+    @NotBlank
     private String user;
 
     private String header;
@@ -41,6 +47,16 @@ public class UpdateTodoCommand {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return "UpdateTodoCommand{" +
+                "id='" + id + '\'' +
+                ", user='" + user + '\'' +
+                ", header='" + header + '\'' +
+                ", text='" + text + '\'' +
+                '}';
     }
 
 }

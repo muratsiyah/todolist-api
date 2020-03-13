@@ -11,6 +11,8 @@ import com.murat.siyah.todolistapi.domain.todo.query.GetTodoByIdQuery;
 import com.murat.siyah.todolistapi.domain.todo.query.GetTodosQuery;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("todo")
 public class TodoController {
@@ -25,35 +27,29 @@ public class TodoController {
     }
 
     @GetMapping
-    public GetTodolistResponse get(@RequestParam(defaultValue = "0", required = false) int page,
-                                   @RequestParam(defaultValue = "100", required = false) int size,
-                                   @RequestParam(required = false) String user) {
-        GetTodosQuery query = new GetTodosQuery(page, size, user);
-
-        return todoQueryHandler.getTodos(query);
+    public GetTodolistResponse get(@RequestParam String user) {
+        return todoQueryHandler.getTodos(new GetTodosQuery(user));
     }
 
     @GetMapping("{id}")
     public GetTodoResponse getById(@PathVariable String id) {
-        GetTodoByIdQuery query = new GetTodoByIdQuery(id);
-
-        return todoQueryHandler.getTodoById(query);
+        return todoQueryHandler.getTodoById(new GetTodoByIdQuery(id));
     }
 
     @PostMapping
-    public GetTodoResponse add(@RequestBody AddTodoCommand command) {
+    public GetTodoResponse add(@RequestBody @Valid AddTodoCommand command) {
         return todoCommandHandler.addTodo(command);
     }
 
     @PutMapping("{id}")
-    public GetTodoResponse update(@RequestBody UpdateTodoCommand command, @PathVariable String id) {
+    public GetTodoResponse update(@RequestBody @Valid UpdateTodoCommand command, @PathVariable String id) {
         command.setId(id);
 
         return todoCommandHandler.updateTodo(command);
     }
 
     @DeleteMapping("{id}")
-    public void delete(@RequestBody DeleteCommand command, @PathVariable String id) {
+    public void delete(@RequestBody @Valid DeleteCommand command, @PathVariable String id) {
         command.setId(id);
 
         todoCommandHandler.deleteTodo(command);
