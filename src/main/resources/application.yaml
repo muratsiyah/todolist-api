@@ -1,6 +1,14 @@
 spring:
   application:
     name: todolist-api
-  data:
-    couchbase:
-      auto-index: true
+  couchbase:
+    bootstrap-hosts: http://localhost
+    bucket:
+      name: todo
+    auto-index: true
+    env:
+      timeouts:
+        connect: 15s
+        socket-connect: 15s
+    username: Administrator
+    password: 1122334455

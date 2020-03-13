@@ -8,9 +8,6 @@ import com.murat.siyah.todolistapi.domain.todo.exception.TodoNotFoundException;
 import com.murat.siyah.todolistapi.domain.todo.query.GetTodoByIdQuery;
 import com.murat.siyah.todolistapi.domain.todo.query.GetTodosQuery;
 import com.murat.siyah.todolistapi.infrastructure.repository.TodoRepository;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -26,17 +23,14 @@ public class TodoQueryHandler {
     }
 
     public GetTodoResponse getTodoById(GetTodoByIdQuery query) {
-        Todo todo = todoRepository.findTodoIdAndIsDeletedIsFalse(query.getId())
+        Todo todo = todoRepository.findTodoByIdAndIsDeletedIsFalse(query.getId())
                 .orElseThrow(TodoNotFoundException::new);
 
         return new GetTodoResponse(todo);
     }
 
     public GetTodolistResponse getTodos(GetTodosQuery query) {
-        Pageable pageable = PageRequest.of(query.getPage(), query.getSize(), Sort.Direction.DESC, "createdDate");
-
-        List<GetTodolistModel> todolistModels = todoRepository.findTodosByUserAndIsDeletedIsFalse(pageable, query.getUser())
-                .getContent()
+        List<GetTodolistModel> todolistModels = todoRepository.findTodosByUserAndIsDeletedIsFalse(query.getUser())
                 .stream()
                 .map(GetTodolistModel::new)
                 .collect(Collectors.toList());

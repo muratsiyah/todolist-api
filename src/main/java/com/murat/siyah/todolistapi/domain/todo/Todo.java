@@ -4,8 +4,10 @@ import com.murat.siyah.todolistapi.domain.todo.command.AddTodoCommand;
 import com.murat.siyah.todolistapi.domain.todo.command.UpdateTodoCommand;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.couchbase.core.mapping.Document;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @Document
@@ -34,16 +36,16 @@ public class Todo {
         header = command.getHeader();
         text = command.getText();
         createdDate = LocalDateTime.now().toString();
-        isDeleted = true;
+        isDeleted = false;
     }
 
     public void update(UpdateTodoCommand command) {
-        header = command.getHeader();
-        text = command.getText();
+        header = StringUtils.isEmpty(command.getHeader()) ? header : command.getHeader();
+        text = StringUtils.isEmpty(command.getText()) ? text : command.getText();
     }
 
     public void deleted() {
-        isDeleted = false;
+        isDeleted = true;
     }
 
     public String getId() {
@@ -68,6 +70,31 @@ public class Todo {
 
     public boolean isDeleted() {
         return isDeleted;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Todo todo = (Todo) o;
+        return Objects.equals(id, todo.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Todo{" +
+                "id='" + id + '\'' +
+                ", user='" + user + '\'' +
+                ", header='" + header + '\'' +
+                ", text='" + text + '\'' +
+                ", createdDate='" + createdDate + '\'' +
+                ", isDeleted=" + isDeleted +
+                '}';
     }
 
 }
