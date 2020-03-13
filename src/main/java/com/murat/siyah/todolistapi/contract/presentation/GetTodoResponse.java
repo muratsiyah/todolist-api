@@ -12,14 +12,14 @@ public class GetTodoResponse {
 
     private String text;
 
-    private String date;
+    private String createdDate;
 
     public GetTodoResponse(Todo todo) {
         id = todo.getId();
         user = todo.getUser();
         header = todo.getHeader();
         text = todo.getText();
-        date = todo.getCreatedDate();
+        createdDate = todo.getCreatedDate();
     }
 
     public String getId() {
@@ -38,7 +38,7 @@ public class GetTodoResponse {
         return text;
     }
 
-    public String getDate() {
-        return date;
+    public String getCreatedDate() {
+        return createdDate;
     }
 }
