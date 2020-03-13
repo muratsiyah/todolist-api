@@ -17,16 +17,9 @@ public class GetTodolistResponse {
         return user;
     }
 
-    public void setUser(String user) {
-        this.user = user;
-    }
 
     public List<GetTodolistModel> getTodolist() {
         return todolist;
-    }
-
-    public void setTodolist(List<GetTodolistModel> todolist) {
-        this.todolist = todolist;
     }
 
 }

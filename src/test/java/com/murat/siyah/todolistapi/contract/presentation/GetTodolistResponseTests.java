@@ -20,11 +20,12 @@ public class GetTodolistResponseTests {
 
         GetTodolistModel getTodolistModel = new GetTodolistModel(todo);
 
-        GetTodolistResponse getTodolistResponse = new GetTodolistResponse("testUser", Collections.singletonList(getTodolistModel));
+        GetTodolistResponse getTodolistResponse = new GetTodolistResponse(todo.getUser(), Collections.singletonList(getTodolistModel));
 
         Assert.assertEquals(getTodolistResponse.getTodolist().get(0).getId(), todo.getId());
         Assert.assertEquals(getTodolistResponse.getTodolist().get(0).getHeader(), todo.getHeader());
         Assert.assertEquals(getTodolistResponse.getTodolist().get(0).getText(), todo.getText());
+        Assert.assertEquals(getTodolistResponse.getUser(), "testUser");
     }
 
 }

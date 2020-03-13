@@ -77,6 +77,8 @@ public class TodoCommandHandlerTests {
         Todo todo = new Todo(addTodoCommand);
 
         UpdateTodoCommand command = new UpdateTodoCommand();
+        command.setId("123");
+        command.setUser("testUser");
         command.setHeader("testHeader1");
         command.setText("testText1");
 
