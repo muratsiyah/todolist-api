@@ -9,4 +9,4 @@ EXPOSE 8080
 WORKDIR /app
 COPY --from=build-project ./todolist-api/target/todolist-api-*.jar ./todolist-api.jar
 COPY ./init.sh /
-ENTRYPOINT [ "/bin/sh", "/init.sh" ]git
+ENTRYPOINT [ "/bin/sh", "/init.sh" ]

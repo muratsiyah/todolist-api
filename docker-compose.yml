@@ -1,7 +1,7 @@
 version: "3"
 services:
   couchbase:
-    image: priyacouch/couchbase-dev
+    image: muratkara132/todolist-couchbase
     ports:
       - 8091:8091
       - 8092:8092
@@ -19,7 +19,7 @@ services:
       - COUCHBASE_RBAC_NAME="admin"
       - CLUSTER_NAME=dev_cluster
   api:
-    image: muratkara132/todolist-api:1.0.1
+    image: muratkara132/todolist-api
     depends_on:
       - couchbase
     ports:

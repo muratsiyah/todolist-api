@@ -2,7 +2,7 @@ spring:
   application:
     name: todolist-api
   couchbase:
-    bootstrap-hosts: http://localhost
+    bootstrap-hosts: couchbase
     bucket:
       name: todo
     auto-index: true
