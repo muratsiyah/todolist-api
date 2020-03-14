@@ -1,0 +1,28 @@
+version: "3"
+services:
+  couchbase:
+    image: priyacouch/couchbase-dev
+    ports:
+      - 8091:8091
+      - 8092:8092
+      - 8093:8093
+      - 8094:8094
+      - 11210:11210
+      - 18091:18091
+      - 18092:18092
+    environment:
+      - COUCHBASE_ADMINISTRATOR_USERNAME=Administrator
+      - COUCHBASE_ADMINISTRATOR_PASSWORD=1122334455
+      - COUCHBASE_BUCKET=todo
+      - COUCHBASE_RBAC_USERNAME=Administrator
+      - COUCHBASE_RBAC_PASSWORD=1122334455
+      - COUCHBASE_RBAC_NAME="admin"
+      - CLUSTER_NAME=dev_cluster
+  api:
+    image: muratkara132/todolist-api:1.0.1
+    depends_on:
+      - couchbase
+    ports:
+      - 8080:8080
+    #app restarts until couchbase server initialized.
+    restart: always
