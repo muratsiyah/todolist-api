@@ -8,4 +8,4 @@ FROM openjdk:8-jre-alpine
 EXPOSE 8080
 WORKDIR /app
 COPY --from=build-project ./todolist-api/target/todolist-api-*.jar ./todolist-api.jar
-CMD ["java", "-jar", "todolist-api.jar"]
+CMD ["init.sh"]
